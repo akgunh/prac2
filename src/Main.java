@@ -93,8 +93,7 @@ public class Main {
         Properties props = new Properties();
         props.setProperty("user", "postgres");
         props.setProperty("password", "password");
-        Connection conn = DriverManager.getConnection(url, props);
-        return conn;
+        return DriverManager.getConnection(url, props);
     }
 
     //sluit de connectie dan ook netjes ook af
