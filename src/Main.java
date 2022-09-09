@@ -18,7 +18,7 @@ public class Main {
     private static void testReizigerDAO(ReizigerDAO rdao) throws IOException {
         System.out.println("\n---------- Test ReizigerDAO -------------");
 
-        // Haal alle reizigers op uit de database
+        //Haal alle reizigers op uit de database
         //test of je alle gebruikers kan ophalen uit het systeem
         System.out.println("\n        -------findAll()--------\n");
         List<Reiziger> reizigers = rdao.findAll();
@@ -29,7 +29,7 @@ public class Main {
         System.out.println();
         System.out.println("------------------------------------------");
 
-        // Maak een nieuwe reiziger aan en persisteer deze in de database
+        //Opslaan van een nieuwe reiziger
         //Dit te doen door het save functie
         System.out.println("\n        -------save()--------\n");
         String gbdatum = "1981-03-14";
@@ -47,7 +47,7 @@ public class Main {
         System.out.println("------------------------------------------");
 
 
-        // Voeg aanvullende tests van de ontbrekende CRUD-operaties in.
+        //Voeg aanvullende tests van de ontbrekende CRUD-operaties in.
 
         //update optie
         System.out.println("\n        -------update()--------\n");

@@ -8,9 +8,9 @@ public class ReizigerDAOPsql implements ReizigerDAO{
         this.connectie = connectie;
     }
 
+    //opslaan van de reiziger
     @Override
     public boolean save(Reiziger reiziger) {
-        // Waarom return je een boolean i.p.v. een list aangezien je de eerste zoveel Reizigers moet teruggeven...?
         try {
             PreparedStatement preparedStatement = connectie.prepareStatement("INSERT INTO reiziger values (?, ?, ?, ?, ?)");
             preparedStatement.setInt(1, reiziger.getId());
@@ -25,6 +25,7 @@ public class ReizigerDAOPsql implements ReizigerDAO{
         }
     }
 
+    //updaten van de reizigers gegevens
     @Override
     public boolean update(Reiziger reiziger) {
         try {
@@ -41,6 +42,7 @@ public class ReizigerDAOPsql implements ReizigerDAO{
         }
     }
 
+    //verwijderen van de reiziger
     @Override
     public boolean delete(Reiziger reiziger) {
         try {
@@ -53,6 +55,7 @@ public class ReizigerDAOPsql implements ReizigerDAO{
         }
     }
 
+    //vinden door de id
     @Override
     public Reiziger findById(int id) {
         try {
@@ -60,27 +63,30 @@ public class ReizigerDAOPsql implements ReizigerDAO{
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
 
+            //vooraf gedefinieerde waardes
             String voorletters = null;
             String tussenvoegsel = null;
             String achternaam = null;
             Date geboortedatum = null;
             Reiziger reiziger;
 
-
+            //als een volgende waarde bestaat
             while (resultSet.next()) {
                 voorletters = resultSet.getString("voorletters");
                 tussenvoegsel = resultSet.getString("tussenvoegsel");
                 achternaam = resultSet.getString("achternaam");
                 geboortedatum = resultSet.getDate("geboortedatum");
             }
+            //plaats de volgende waardes en return die
             reiziger = new Reiziger(id, voorletters, tussenvoegsel, achternaam, geboortedatum);
             return reiziger;
         } catch (SQLException sqlException) {
-            System.out.println(sqlException + " fout bij vinden van de volgende id!"  + id);
+            System.out.println(sqlException + " fout bij vinden door de volgende id:"  + id);
             return null;
         }
     }
 
+    //vinden door de geboortedatum
     @Override
     public List<Reiziger> findByGbDatum(String datum) {
         try {
@@ -101,11 +107,12 @@ public class ReizigerDAOPsql implements ReizigerDAO{
             }
             return opDatum;
         } catch (SQLException sqlException) {
-            System.out.println(sqlException + " fout bij vinden geboortedatum!");
+            System.out.println(sqlException + " fout bij vinden door geboortedatum!");
             return null;
         }
     }
 
+    //vind alle
     @Override
     public List<Reiziger> findAll() {
         try {
